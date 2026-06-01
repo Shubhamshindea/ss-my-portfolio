@@ -73,7 +73,7 @@ export function Contact() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gold/10 blur-[140px] -z-10" />
       <div className="max-w-6xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
-          <div className="text-xs font-mono uppercase tracking-[0.3em] text-gold mb-6">05 — Let's Build</div>
+          <div className="text-xs font-mono uppercase tracking-[0.3em] text-gold mb-6">06 — Let's Build</div>
           <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6">
             Have a role, a project,<br />or an <em className="text-gradient-gold not-italic">idea worth shipping?</em>
           </h2>
