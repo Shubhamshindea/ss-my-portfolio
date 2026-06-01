@@ -1,3 +1,4 @@
+import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { z } from "zod";
 import logo from "@/assets/logo.png";
