@@ -1,8 +1,13 @@
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { z } from "zod";
-import { Mail, Phone, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, ArrowUp } from "lucide-react";
 import logo from "@/assets/logo.png";
+
+const scrollToTop = () => {
+  if (typeof window === "undefined") return;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 const contacts = [
   { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
@@ -165,14 +170,32 @@ export function Contact() {
       </div>
 
       <footer className="mt-32 border-t border-border pt-10 pb-12">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="Monogram" width={28} height={28} className="w-7 h-7" loading="lazy" />
-            <span className="font-serif text-sm">Shubham Shinde</span>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col items-center gap-10">
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label="Back to top"
+            className="group inline-flex flex-col items-center gap-3 text-muted-foreground hover:text-gold transition-colors"
+          >
+            <span className="w-12 h-12 rounded-full border border-border group-hover:border-gold flex items-center justify-center transition-all group-hover:-translate-y-1">
+              <ArrowUp size={18} />
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.3em] font-mono">Back to top</span>
+          </button>
+          <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-6">
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="flex items-center gap-3 hover:text-gold transition-colors"
+              aria-label="Back to top"
+            >
+              <img src={logo} alt="Monogram" width={28} height={28} className="w-7 h-7" loading="lazy" />
+              <span className="font-serif text-sm">Shubham Shinde</span>
+            </button>
+            <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest">
+              © MMXXVI · Crafted with intent
+            </p>
           </div>
-          <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest">
-            © MMXXVI · Crafted with intent
-          </p>
         </div>
       </footer>
     </section>

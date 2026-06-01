@@ -98,12 +98,12 @@ export function Hero() {
       </div>
 
       {/* Marquee */}
-      <div className="mt-24 border-y border-border py-6 overflow-hidden">
-        <div className="flex gap-16 whitespace-nowrap animate-[shimmer_30s_linear_infinite]">
+      <div className="mt-24 border-y border-border py-6 overflow-hidden marquee-mask">
+        <div className="flex gap-16 whitespace-nowrap w-max animate-marquee">
           {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="flex gap-16 items-center text-muted-foreground/70">
+            <div key={i} className="flex gap-16 items-center text-muted-foreground/70 shrink-0">
               {["Java", "Spring Boot", "PostgreSQL", "MySQL", "REST APIs", "Git", "HTML/CSS", "JavaScript", "IoT Systems", "Cloud Concepts"].map((t) => (
-                <span key={t} className="font-serif italic text-2xl flex items-center gap-16">
+                <span key={`${i}-${t}`} className="font-serif italic text-2xl flex items-center gap-16">
                   {t}
                   <span className="text-gold">✦</span>
                 </span>
