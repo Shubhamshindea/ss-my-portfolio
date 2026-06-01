@@ -1,4 +1,4 @@
-import portrait from "@/assets/shubham-portrait.asset.json";
+import portrait from "@/assets/shubham-portrait.png.asset.json";
 
 export function Hero() {
   return (
