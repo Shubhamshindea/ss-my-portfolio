@@ -157,8 +157,22 @@
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-x-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
 .animate-fade-up { animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-blob { animation: blob 18s ease-in-out infinite; }
 .animate-spin-slow { animation: spin-slow 30s linear infinite; }
 .animate-gradient { background-size: 200% 200%; animation: gradient-shift 8s ease infinite; }
+.animate-marquee { animation: marquee-x 30s linear infinite; }
+.animate-marquee-reverse { animation: marquee-x-reverse 35s linear infinite; }
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
