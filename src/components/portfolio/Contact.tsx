@@ -1,13 +1,14 @@
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { z } from "zod";
+import { Mail, Phone, Linkedin, Github } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const contacts = [
-  { label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
-  { label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
-  { label: "LinkedIn", value: "in/shubham-shinde----", href: "https://www.linkedin.com/in/shubham-shinde----" },
-  { label: "GitHub", value: "@Shubhamshindea", href: "https://github.com/Shubhamshindea" },
+  { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
+  { icon: Linkedin, label: "LinkedIn", value: "in/shubham-shinde----", href: "https://www.linkedin.com/in/shubham-shinde----" },
+  { icon: Github, label: "GitHub", value: "@Shubhamshindea", href: "https://github.com/Shubhamshindea" },
 ];
 
 const schema = z.object({
