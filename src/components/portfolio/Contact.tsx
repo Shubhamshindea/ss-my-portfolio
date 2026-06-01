@@ -1,13 +1,14 @@
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { z } from "zod";
+import { Mail, Phone, Linkedin, Github } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const contacts = [
-  { label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
-  { label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
-  { label: "LinkedIn", value: "in/shubham-shinde----", href: "https://www.linkedin.com/in/shubham-shinde----" },
-  { label: "GitHub", value: "@Shubhamshindea", href: "https://github.com/Shubhamshindea" },
+  { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
+  { icon: Linkedin, label: "LinkedIn", value: "in/shubham-shinde----", href: "https://www.linkedin.com/in/shubham-shinde----" },
+  { icon: Github, label: "GitHub", value: "@Shubhamshindea", href: "https://github.com/Shubhamshindea" },
 ];
 
 const schema = z.object({
@@ -72,7 +73,7 @@ export function Contact() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gold/10 blur-[140px] -z-10" />
       <div className="max-w-6xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
-          <div className="text-xs font-mono uppercase tracking-[0.3em] text-gold mb-6">05 — Let's Build</div>
+          <div className="text-xs font-mono uppercase tracking-[0.3em] text-gold mb-6">06 — Let's Build</div>
           <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6">
             Have a role, a project,<br />or an <em className="text-gradient-gold not-italic">idea worth shipping?</em>
           </h2>
@@ -148,10 +149,15 @@ export function Contact() {
                 href={c.href}
                 target={c.href.startsWith("http") ? "_blank" : undefined}
                 rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="block bg-background p-6 hover:bg-card transition-colors group"
+                className="flex items-center gap-4 bg-background p-6 hover:bg-card transition-colors group"
               >
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">{c.label}</div>
-                <div className="text-sm font-medium group-hover:text-gold break-all transition-colors">{c.value}</div>
+                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
+                  <c.icon className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-0.5">{c.label}</div>
+                  <div className="text-sm font-medium group-hover:text-gold break-all transition-colors">{c.value}</div>
+                </div>
               </a>
             ))}
           </aside>
