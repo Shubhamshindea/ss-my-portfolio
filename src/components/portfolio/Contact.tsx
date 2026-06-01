@@ -1,8 +1,13 @@
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { z } from "zod";
-import { Mail, Phone, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, ArrowUp } from "lucide-react";
 import logo from "@/assets/logo.png";
+
+const scrollToTop = () => {
+  if (typeof window === "undefined") return;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 const contacts = [
   { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
