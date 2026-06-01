@@ -26,6 +26,12 @@ const timeline = [
     org: "Diamond Independent PU College",
     points: ["Science stream with focus on mathematics, physics, and computing."],
   },
+  {
+    period: "Until 2020",
+    role: "Secondary School (SSLC)",
+    org: "Government High School, Bhalki",
+    points: ["Completed schooling with a strong foundation in science and mathematics."],
+  },
 ];
 
 export function Experience() {
