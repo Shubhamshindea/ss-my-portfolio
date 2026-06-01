@@ -29,7 +29,7 @@ export function Hero() {
             <span className="italic font-light">precision.</span>
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-            I'm <span className="text-foreground font-medium">Shubham Shinde</span> — a software developer and IT support engineer building full-stack systems with Java, Spring Boot, and modern web tooling. Currently engineering production-grade applications at TAP Academy.
+            I'm <span className="text-foreground font-medium">Shubham Shinde</span> — a software developer and IT support engineer building full-stack systems with Java, Spring Boot, and modern web tooling. Currently a <span className="text-gold">Software Developer Intern</span> at TAP Academy and <span className="text-foreground font-medium">actively seeking full-time opportunities</span>.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <a
@@ -61,7 +61,7 @@ export function Hero() {
         </div>
 
         <div className="lg:col-span-5 relative animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <div className="relative aspect-[3/4] max-w-md mx-auto">
+          <div className="relative aspect-[3/4] max-w-[300px] sm:max-w-xs mx-auto">
             {/* Frame */}
             <div className="absolute -inset-4 border border-gold/30 rounded-sm" />
             <div className="absolute -inset-2 border border-gold/20 rounded-sm" />
