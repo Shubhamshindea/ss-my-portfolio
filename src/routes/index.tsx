@@ -38,6 +38,7 @@ function Index() {
       <Expertise />
       <Work />
       <Experience />
+      <AnimationTutor />
       <Contact />
     </main>
   );
