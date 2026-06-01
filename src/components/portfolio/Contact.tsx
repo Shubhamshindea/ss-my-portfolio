@@ -149,10 +149,15 @@ export function Contact() {
                 href={c.href}
                 target={c.href.startsWith("http") ? "_blank" : undefined}
                 rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="block bg-background p-6 hover:bg-card transition-colors group"
+                className="flex items-center gap-4 bg-background p-6 hover:bg-card transition-colors group"
               >
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">{c.label}</div>
-                <div className="text-sm font-medium group-hover:text-gold break-all transition-colors">{c.value}</div>
+                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
+                  <c.icon className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-0.5">{c.label}</div>
+                  <div className="text-sm font-medium group-hover:text-gold break-all transition-colors">{c.value}</div>
+                </div>
               </a>
             ))}
           </aside>
