@@ -52,6 +52,31 @@ export function Expertise() {
             </div>
           ))}
         </div>
+
+        {/* Auto-scrolling skill marquees */}
+        <div className="mt-16 space-y-4">
+          {[
+            { skills: ["Java", "Spring Boot", "REST APIs", "PostgreSQL", "MySQL", "JavaScript", "HTML5", "CSS3", "Git", "GitHub", "OOP", "DSA"], reverse: false },
+            { skills: ["Responsive Design", "Cloud Concepts", "Vercel", "IoT Systems", "Query Optimization", "Data Modeling", "Incident Mgmt.", "Linux", "Networking", "Agile"], reverse: true },
+          ].map((row, idx) => (
+            <div key={idx} className="overflow-hidden marquee-mask py-2">
+              <div className={`flex gap-4 w-max ${row.reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+                {Array.from({ length: 2 }).map((_, i) => (
+                  <div key={i} className="flex gap-4 shrink-0">
+                    {row.skills.map((s) => (
+                      <span
+                        key={`${i}-${s}`}
+                        className="px-5 py-2.5 rounded-full border border-border bg-card/60 text-sm whitespace-nowrap hover:border-gold hover:text-gold transition-colors"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
