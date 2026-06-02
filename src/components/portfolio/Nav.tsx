@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MoreVertical, Sun, Moon, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
+import { MoreVertical, Palette, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const links = [
@@ -10,17 +10,36 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
+type ThemeKey = "light" | "dark" | "brown" | "orange" | "ocean" | "rose";
+
+const themes: { key: ThemeKey; label: string; swatch: string; cls: string }[] = [
+  { key: "light", label: "Ivory", swatch: "oklch(0.78 0.10 70)", cls: "" },
+  { key: "dark", label: "Noir", swatch: "oklch(0.78 0.13 80)", cls: "dark" },
+  { key: "brown", label: "Cocoa", swatch: "oklch(0.74 0.13 55)", cls: "theme-brown" },
+  { key: "orange", label: "Citrus", swatch: "oklch(0.68 0.18 45)", cls: "theme-orange" },
+  { key: "ocean", label: "Ocean", swatch: "oklch(0.72 0.14 210)", cls: "theme-ocean" },
+  { key: "rose", label: "Rose", swatch: "oklch(0.68 0.16 15)", cls: "theme-rose" },
+];
+
+function applyTheme(key: ThemeKey) {
+  const root = document.documentElement;
+  themes.forEach((t) => t.cls && root.classList.remove(t.cls));
+  const next = themes.find((t) => t.key === key);
+  if (next?.cls) root.classList.add(next.cls);
+}
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [theme, setTheme] = useState<ThemeKey>("dark");
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    const dark = stored ? stored === "dark" : true;
-    setIsDark(dark);
-    document.documentElement.classList.toggle("dark", dark);
+    const stored = (typeof window !== "undefined" ? localStorage.getItem("theme") : null) as ThemeKey | null;
+    const initial: ThemeKey = stored && themes.some((t) => t.key === stored) ? stored : "dark";
+    setTheme(initial);
+    applyTheme(initial);
   }, []);
 
   useEffect(() => {
@@ -30,12 +49,13 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+  const pickTheme = (key: ThemeKey) => {
+    setTheme(key);
+    applyTheme(key);
+    localStorage.setItem("theme", key);
+    setPaletteOpen(false);
   };
+
 
   return (
     <header
