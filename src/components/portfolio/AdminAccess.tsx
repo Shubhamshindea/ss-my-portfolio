@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Lock, LogOut, Plus, Save, Trash2, Upload } from "lucide-react";
@@ -29,8 +29,17 @@ export function AdminAccess() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  const [checkedAuth, setCheckedAuth] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const { data, refetch } = useQuery({ queryKey: ["admin-portfolio"], queryFn: () => getAdmin(), retry: false });
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setLoggedIn(Boolean(data.user));
+      setCheckedAuth(true);
+    });
+  }, []);
+
+  const { data, refetch } = useQuery({ queryKey: ["admin-portfolio"], queryFn: () => getAdmin(), retry: false, enabled: loggedIn });
   const portfolio = data?.portfolio;
   const skills = useMemo(() => portfolio?.skills ?? [], [portfolio?.skills]);
 
@@ -46,6 +55,7 @@ export function AdminAccess() {
     setBusy(false);
     if (error) setMessage(error.message);
     else {
+      setLoggedIn(true);
       setMessage(mode === "signup" ? "Check your email, then log in." : "Logged in.");
       await refresh();
     }
@@ -65,7 +75,7 @@ export function AdminAccess() {
     setBusy(false);
   };
 
-  if (!data) {
+  if (!checkedAuth) {
     return (
       <div className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
         <Lock size={16} className="mb-2 text-gold" /> Admin access loads after login.
@@ -73,7 +83,7 @@ export function AdminAccess() {
     );
   }
 
-  if (!data.isAdmin) {
+  if (!loggedIn || !data?.isAdmin) {
     return (
       <div className="rounded-lg border border-border p-4 space-y-3">
         <div className="flex items-center gap-2 text-sm font-medium"><Lock size={16} className="text-gold" /> Admin access</div>
@@ -83,7 +93,7 @@ export function AdminAccess() {
           <button disabled={busy} onClick={() => signIn("login")} className="rounded-full bg-gold px-4 py-2 text-xs font-medium text-primary-foreground disabled:opacity-60">Login</button>
           <button disabled={busy} onClick={() => signIn("signup")} className="rounded-full border border-border px-4 py-2 text-xs disabled:opacity-60">Sign up</button>
         </div>
-        {data.canClaimAdmin && <button disabled={busy} onClick={async () => { await claimAdmin(); await refresh(); }} className="text-xs text-gold hover:underline">Claim first admin</button>}
+        {data?.canClaimAdmin && <button disabled={busy} onClick={async () => { await claimAdmin(); await refresh(); }} className="text-xs text-gold hover:underline">Claim first admin</button>}
         {message && <p className="text-xs text-muted-foreground">{message}</p>}
       </div>
     );
@@ -93,7 +103,7 @@ export function AdminAccess() {
     <div className="rounded-lg border border-border p-4 space-y-5">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-sm font-medium"><Lock size={16} className="text-gold" /> Admin editor</div>
-        <button onClick={() => supabase.auth.signOut().then(refresh)} aria-label="Logout" className="text-muted-foreground hover:text-gold"><LogOut size={16} /></button>
+        <button onClick={() => supabase.auth.signOut().then(() => { setLoggedIn(false); return refresh(); })} aria-label="Logout" className="text-muted-foreground hover:text-gold"><LogOut size={16} /></button>
       </div>
 
       <div className="space-y-3">
