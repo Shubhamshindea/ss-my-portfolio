@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MoreVertical, Palette, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
+import { AdminAccess } from "@/components/portfolio/AdminAccess";
 import logo from "@/assets/logo.png";
 
 const links = [
@@ -13,12 +14,12 @@ const links = [
 type ThemeKey = "light" | "dark" | "brown" | "orange" | "ocean" | "rose";
 
 const themes: { key: ThemeKey; label: string; swatch: string; cls: string }[] = [
-  { key: "light", label: "Ivory", swatch: "oklch(0.78 0.10 70)", cls: "" },
-  { key: "dark", label: "Noir", swatch: "oklch(0.78 0.13 80)", cls: "dark" },
-  { key: "brown", label: "Cocoa", swatch: "oklch(0.74 0.13 55)", cls: "theme-brown" },
-  { key: "orange", label: "Citrus", swatch: "oklch(0.68 0.18 45)", cls: "theme-orange" },
-  { key: "ocean", label: "Ocean", swatch: "oklch(0.72 0.14 210)", cls: "theme-ocean" },
-  { key: "rose", label: "Rose", swatch: "oklch(0.68 0.16 15)", cls: "theme-rose" },
+  { key: "light", label: "Ivory", swatch: "oklch(0.97 0.02 95)", cls: "" },
+  { key: "dark", label: "Noir", swatch: "oklch(0.16 0.01 260)", cls: "dark" },
+  { key: "brown", label: "Brown", swatch: "oklch(0.35 0.08 55)", cls: "theme-brown" },
+  { key: "orange", label: "Orange", swatch: "oklch(0.68 0.20 45)", cls: "theme-orange" },
+  { key: "ocean", label: "Ocean", swatch: "oklch(0.56 0.15 220)", cls: "theme-ocean" },
+  { key: "rose", label: "Rose", swatch: "oklch(0.62 0.18 15)", cls: "theme-rose" },
 ];
 
 function applyTheme(key: ThemeKey) {
@@ -185,7 +186,7 @@ export function Nav() {
             <div className="space-y-4 mb-8">
               {[
                 { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
-                { icon: Phone, label: "Phone", value: "+91 79759 49002", href: "tel:+917975949002" },
+                { icon: Phone, label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
                 { icon: Linkedin, label: "LinkedIn", value: "shubham-shinde", href: "https://www.linkedin.com/in/shubham-shinde----" },
                 { icon: Github, label: "GitHub", value: "Shubhamshindea", href: "https://github.com/Shubhamshindea" },
                 { icon: MapPin, label: "Location", value: "Bengaluru, India" },
@@ -223,6 +224,10 @@ export function Nav() {
                   → {l.label}
                 </a>
               ))}
+            </div>
+
+            <div className="mt-6 border-t border-border pt-6">
+              <AdminAccess />
             </div>
           </aside>
         </div>
