@@ -87,13 +87,36 @@ export function Nav() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="w-10 h-10 rounded-full border border-border hover:border-gold hover:text-gold flex items-center justify-center transition-all hover:rotate-12"
-          >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setPaletteOpen((v) => !v)}
+              aria-label="Change theme"
+              className="w-10 h-10 rounded-full border border-border hover:border-gold hover:text-gold flex items-center justify-center transition-all"
+            >
+              <Palette size={16} />
+            </button>
+            {paletteOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setPaletteOpen(false)} />
+                <div className="absolute right-0 mt-2 z-50 bg-popover border border-border rounded-xl shadow-deep p-3 w-56 animate-fade-up">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 px-1">Theme</div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {themes.map((t) => (
+                      <button
+                        key={t.key}
+                        onClick={() => pickTheme(t.key)}
+                        aria-label={t.label}
+                        className={`flex flex-col items-center gap-1 p-2 rounded-lg border transition-all hover:scale-105 ${theme === t.key ? "border-gold" : "border-border"}`}
+                      >
+                        <span className="w-7 h-7 rounded-full border border-border" style={{ background: t.swatch }} />
+                        <span className="text-[10px]">{t.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
           <button
             onClick={() => setInfoOpen(true)}
             aria-label="Quick info"
