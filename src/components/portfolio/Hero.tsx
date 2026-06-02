@@ -1,6 +1,10 @@
 import portrait from "@/assets/shubham-portrait.png.asset.json";
+import resumeAsset from "@/assets/resume_shubham.pdf.asset.json";
+import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 
-export function Hero() {
+export function Hero({ portfolio }: { portfolio?: PortfolioPublicData }) {
+  const portraitUrl = portfolio?.portraitUrl ?? portrait.url;
+  const resumeUrl = portfolio?.resumeUrl ?? resumeAsset.url;
   return (
     <section id="top" className="relative min-h-screen pt-32 pb-20 overflow-hidden grain">
       {/* Background ornaments */}
@@ -40,7 +44,7 @@ export function Hero() {
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
-              href="/resume.pdf"
+              href={resumeUrl}
               download
               className="group inline-flex items-center gap-3 px-7 py-4 rounded-full border border-gold text-gold hover:bg-gold hover:text-primary-foreground transition-all"
             >
@@ -76,11 +80,12 @@ export function Hero() {
             <div className="absolute inset-0 rounded-sm overflow-hidden shadow-deep">
               <div className="absolute inset-0 bg-gradient-to-tr from-background via-transparent to-gold/10 z-10 mix-blend-overlay" />
               <img
-                src={portrait.url}
+                src={portraitUrl}
                 alt="Portrait of Shubham Shinde"
                 width={800}
                 height={1067}
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: portfolio?.portraitObjectPosition ?? "50% 0%", transform: `scale(${portfolio?.portraitZoom ?? 1})` }}
               />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/90 to-transparent z-10" />
             </div>

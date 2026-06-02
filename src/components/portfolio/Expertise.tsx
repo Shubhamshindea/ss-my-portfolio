@@ -1,3 +1,5 @@
+import type { PortfolioPublicData } from "@/lib/portfolio.functions";
+
 const groups = [
   {
     title: "Languages & Backend",
@@ -17,7 +19,16 @@ const groups = [
   },
 ];
 
-export function Expertise() {
+export function Expertise({ portfolio }: { portfolio?: PortfolioPublicData }) {
+  const activeSkills = portfolio?.skills?.length ? portfolio.skills : groups.flatMap((g) => g.items.map((label) => ({ label, category: g.title })));
+  const grouped = activeSkills.reduce<Record<string, string[]>>((acc, skill) => {
+    const category = skill.category || "General";
+    acc[category] = [...(acc[category] ?? []), skill.label];
+    return acc;
+  }, {});
+  const displayGroups = Object.entries(grouped).map(([title, items]) => ({ title, items }));
+  const marqueeSkills = activeSkills.map((skill) => skill.label);
+
   return (
     <section id="expertise" className="py-32 bg-card/40 border-y border-border relative grain">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -34,7 +45,7 @@ export function Expertise() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-xl overflow-hidden">
-          {groups.map((g, i) => (
+          {displayGroups.map((g, i) => (
             <div
               key={g.title}
               className="bg-background p-8 hover:bg-card transition-colors group relative"
@@ -58,7 +69,7 @@ export function Expertise() {
           <div className="flex gap-4 w-max animate-marquee">
             {Array.from({ length: 2 }).map((_, i) => (
               <div key={i} className="flex gap-4 shrink-0">
-                {["Java", "Spring Boot", "REST APIs", "PostgreSQL", "MySQL", "JavaScript", "HTML5", "CSS3", "Git", "GitHub", "OOP", "DSA"].map((s) => (
+                {marqueeSkills.map((s) => (
                   <span
                     key={`${i}-${s}`}
                     className="px-5 py-2.5 rounded-full border border-border bg-card/60 text-sm whitespace-nowrap hover:border-gold hover:text-gold transition-colors"
