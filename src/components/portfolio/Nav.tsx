@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MoreVertical, Sun, Moon, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
+import { MoreVertical, Palette, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const links = [
@@ -10,17 +10,36 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
+type ThemeKey = "light" | "dark" | "brown" | "orange" | "ocean" | "rose";
+
+const themes: { key: ThemeKey; label: string; swatch: string; cls: string }[] = [
+  { key: "light", label: "Ivory", swatch: "oklch(0.78 0.10 70)", cls: "" },
+  { key: "dark", label: "Noir", swatch: "oklch(0.78 0.13 80)", cls: "dark" },
+  { key: "brown", label: "Cocoa", swatch: "oklch(0.74 0.13 55)", cls: "theme-brown" },
+  { key: "orange", label: "Citrus", swatch: "oklch(0.68 0.18 45)", cls: "theme-orange" },
+  { key: "ocean", label: "Ocean", swatch: "oklch(0.72 0.14 210)", cls: "theme-ocean" },
+  { key: "rose", label: "Rose", swatch: "oklch(0.68 0.16 15)", cls: "theme-rose" },
+];
+
+function applyTheme(key: ThemeKey) {
+  const root = document.documentElement;
+  themes.forEach((t) => t.cls && root.classList.remove(t.cls));
+  const next = themes.find((t) => t.key === key);
+  if (next?.cls) root.classList.add(next.cls);
+}
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [theme, setTheme] = useState<ThemeKey>("dark");
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    const dark = stored ? stored === "dark" : true;
-    setIsDark(dark);
-    document.documentElement.classList.toggle("dark", dark);
+    const stored = (typeof window !== "undefined" ? localStorage.getItem("theme") : null) as ThemeKey | null;
+    const initial: ThemeKey = stored && themes.some((t) => t.key === stored) ? stored : "dark";
+    setTheme(initial);
+    applyTheme(initial);
   }, []);
 
   useEffect(() => {
@@ -30,12 +49,13 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+  const pickTheme = (key: ThemeKey) => {
+    setTheme(key);
+    applyTheme(key);
+    localStorage.setItem("theme", key);
+    setPaletteOpen(false);
   };
+
 
   return (
     <header
@@ -67,13 +87,36 @@ export function Nav() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="w-10 h-10 rounded-full border border-border hover:border-gold hover:text-gold flex items-center justify-center transition-all hover:rotate-12"
-          >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setPaletteOpen((v) => !v)}
+              aria-label="Change theme"
+              className="w-10 h-10 rounded-full border border-border hover:border-gold hover:text-gold flex items-center justify-center transition-all"
+            >
+              <Palette size={16} />
+            </button>
+            {paletteOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setPaletteOpen(false)} />
+                <div className="absolute right-0 mt-2 z-50 bg-popover border border-border rounded-xl shadow-deep p-3 w-56 animate-fade-up">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 px-1">Theme</div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {themes.map((t) => (
+                      <button
+                        key={t.key}
+                        onClick={() => pickTheme(t.key)}
+                        aria-label={t.label}
+                        className={`flex flex-col items-center gap-1 p-2 rounded-lg border transition-all hover:scale-105 ${theme === t.key ? "border-gold" : "border-border"}`}
+                      >
+                        <span className="w-7 h-7 rounded-full border border-border" style={{ background: t.swatch }} />
+                        <span className="text-[10px]">{t.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
           <button
             onClick={() => setInfoOpen(true)}
             aria-label="Quick info"

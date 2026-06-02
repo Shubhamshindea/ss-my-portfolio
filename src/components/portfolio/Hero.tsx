@@ -40,6 +40,14 @@ export function Hero() {
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
+              href="/resume.pdf"
+              download
+              className="group inline-flex items-center gap-3 px-7 py-4 rounded-full border border-gold text-gold hover:bg-gold hover:text-primary-foreground transition-all"
+            >
+              Download Resume
+              <span className="transition-transform group-hover:translate-y-0.5">↓</span>
+            </a>
+            <a
               href="#contact"
               className="inline-flex items-center gap-3 px-7 py-4 rounded-full border border-border hover:border-gold hover:text-gold transition-all"
             >
