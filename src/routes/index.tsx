@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Nav } from "@/components/portfolio/Nav";
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";
 import { Expertise } from "@/components/portfolio/Expertise";
 import { Work } from "@/components/portfolio/Work";
 import { Experience } from "@/components/portfolio/Experience";
+import { getPublicPortfolio } from "@/lib/portfolio.functions";
 
 import { Contact } from "@/components/portfolio/Contact";
 
@@ -30,12 +33,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const getPortfolio = useServerFn(getPublicPortfolio);
+  const { data: portfolio } = useQuery({ queryKey: ["portfolio-public"], queryFn: () => getPortfolio() });
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Nav />
-      <Hero />
+      <Hero portfolio={portfolio} />
       <About />
-      <Expertise />
+      <Expertise portfolio={portfolio} />
       <Work />
       <Experience />
       
