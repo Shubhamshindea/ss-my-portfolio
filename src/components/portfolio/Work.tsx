@@ -43,7 +43,22 @@ const projects = [
   },
 ];
 
-export function Work() {
+import type { PortfolioPublicData } from "@/lib/portfolio.functions";
+
+export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
+  const dynamicItems = portfolio?.projects?.length
+    ? portfolio.projects.map((p, i) => ({
+        no: String(i + 1).padStart(2, "0"),
+        year: p.year ?? "",
+        title: p.title,
+        type: p.subtitle ?? "",
+        blurb: p.description ?? "",
+        tags: p.tags ?? [],
+        href: p.linkUrl ?? null,
+        metrics: [] as { k: string; v: string }[],
+      }))
+    : projects.map((p) => ({ ...p, href: null as string | null }));
+
   return (
     <section id="work" className="py-32 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -57,9 +72,9 @@ export function Work() {
         </div>
 
         <div className="space-y-px bg-border">
-          {projects.map((p) => (
+          {dynamicItems.map((p) => (
             <article
-              key={p.no}
+              key={p.no + p.title}
               className="bg-background p-8 lg:p-12 group hover:bg-card/60 transition-colors"
             >
               <div className="grid lg:grid-cols-12 gap-8 items-start">
@@ -70,32 +85,42 @@ export function Work() {
                   </div>
                 </div>
                 <div className="lg:col-span-6 space-y-4">
-                  <div className="font-mono text-xs uppercase tracking-widest text-gold">{p.type}</div>
+                  {p.type && <div className="font-mono text-xs uppercase tracking-widest text-gold">{p.type}</div>}
                   <h3 className="font-serif text-3xl lg:text-5xl leading-tight group-hover:text-gold transition-colors">
-                    {p.title}
+                    {p.href ? (
+                      <a href={p.href} target="_blank" rel="noreferrer" className="hover:underline">
+                        {p.title} <span className="text-gold text-base align-middle">↗</span>
+                      </a>
+                    ) : (
+                      p.title
+                    )}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed max-w-xl">{p.blurb}</p>
-                  <ul className="flex flex-wrap gap-2 pt-2">
-                    {p.tags.map((t) => (
-                      <li
-                        key={t}
-                        className="text-xs px-3 py-1 rounded-full border border-border text-muted-foreground font-mono"
-                      >
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
+                  {p.blurb && <p className="text-muted-foreground leading-relaxed max-w-xl">{p.blurb}</p>}
+                  {p.tags.length > 0 && (
+                    <ul className="flex flex-wrap gap-2 pt-2">
+                      {p.tags.map((t) => (
+                        <li
+                          key={t}
+                          className="text-xs px-3 py-1 rounded-full border border-border text-muted-foreground font-mono"
+                        >
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <div className="lg:col-span-4 grid grid-cols-3 gap-4 lg:border-l lg:border-border lg:pl-8">
-                  {p.metrics.map((m) => (
-                    <div key={m.v}>
-                      <div className="font-serif text-2xl text-gold">{m.k}</div>
-                      <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">
-                        {m.v}
+                {p.metrics && p.metrics.length > 0 && (
+                  <div className="lg:col-span-4 grid grid-cols-3 gap-4 lg:border-l lg:border-border lg:pl-8">
+                    {p.metrics.map((m) => (
+                      <div key={m.v}>
+                        <div className="font-serif text-2xl text-gold">{m.k}</div>
+                        <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">
+                          {m.v}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -104,3 +129,4 @@ export function Work() {
     </section>
   );
 }
+
