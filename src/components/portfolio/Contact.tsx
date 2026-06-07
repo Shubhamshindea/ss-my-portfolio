@@ -32,7 +32,8 @@ const schema = z.object({
 type FormState = z.infer<typeof schema>;
 type Errors = Partial<Record<keyof FormState, string>>;
 
-export function Contact() {
+export function Contact({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
+  const contacts = buildContacts(portfolio);
   const [form, setForm] = useState<FormState>({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
