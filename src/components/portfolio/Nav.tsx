@@ -30,7 +30,7 @@ function applyTheme(key: ThemeKey) {
   if (next?.cls) root.classList.add(next.cls);
 }
 
-export function Nav() {
+export function Nav({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
