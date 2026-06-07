@@ -126,8 +126,8 @@ export const getPublicPortfolio = createServerFn({ method: "GET" }).handler(asyn
   const data = await fetchPortfolioData(supabaseAdmin as any);
   return {
     ...data,
-    skills: data.skills.filter((s) => s.active),
-    projects: data.projects.filter((p) => p.active),
+    skills: data.skills.filter((s: PortfolioSkill) => s.active),
+    projects: data.projects.filter((p: PortfolioProject) => p.active),
   };
 });
 
