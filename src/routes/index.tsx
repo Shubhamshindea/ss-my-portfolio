@@ -38,14 +38,14 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Nav />
+      <Nav portfolio={portfolio} />
       <Hero portfolio={portfolio} />
       <About />
       <Expertise portfolio={portfolio} />
-      <Work />
+      <Work portfolio={portfolio} />
       <Experience />
       
-      <Contact />
+      <Contact portfolio={portfolio} />
     </main>
   );
 }
