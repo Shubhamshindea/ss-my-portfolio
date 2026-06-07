@@ -2,6 +2,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { z } from "zod";
 import { Mail, Phone, Linkedin, Github, ArrowUp } from "lucide-react";
+import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 import logo from "@/assets/logo.png";
 
 const scrollToTop = () => {
@@ -9,12 +10,17 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-const contacts = [
-  { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
-  { icon: Phone, label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
-  { icon: Linkedin, label: "LinkedIn", value: "in/shubham-shinde----", href: "https://www.linkedin.com/in/shubham-shinde----" },
-  { icon: Github, label: "GitHub", value: "@Shubhamshindea", href: "https://github.com/Shubhamshindea" },
-];
+const defaultEmail = "shindeshubham07447@gmail.com";
+const buildContacts = (p?: PortfolioPublicData) => {
+  const email = p?.email || defaultEmail;
+  const phoneVal = p?.phone || "+91 63621 23723";
+  return [
+    { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
+    { icon: Phone, label: "Phone", value: phoneVal, href: `tel:${phoneVal.replace(/\s+/g, "")}` },
+    { icon: Linkedin, label: "LinkedIn", value: "in/shubham-shinde----", href: p?.linkedinUrl || "https://www.linkedin.com/in/shubham-shinde----" },
+    { icon: Github, label: "GitHub", value: "@Shubhamshindea", href: p?.githubUrl || "https://github.com/Shubhamshindea" },
+  ];
+};
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100),
