@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MoreVertical, Palette, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
 import { AdminAccess } from "@/components/portfolio/AdminAccess";
+import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 import logo from "@/assets/logo.png";
 
 const links = [
@@ -29,7 +30,7 @@ function applyTheme(key: ThemeKey) {
   if (next?.cls) root.classList.add(next.cls);
 }
 
-export function Nav() {
+export function Nav({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -185,11 +186,11 @@ export function Nav() {
 
             <div className="space-y-4 mb-8">
               {[
-                { icon: Mail, label: "Email", value: "shindeshubham07447@gmail.com", href: "mailto:shindeshubham07447@gmail.com" },
-                { icon: Phone, label: "Phone", value: "+91 63621 23723", href: "tel:+916362123723" },
-                { icon: Linkedin, label: "LinkedIn", value: "shubham-shinde", href: "https://www.linkedin.com/in/shubham-shinde----" },
-                { icon: Github, label: "GitHub", value: "Shubhamshindea", href: "https://github.com/Shubhamshindea" },
-                { icon: MapPin, label: "Location", value: "Bengaluru, India" },
+                { icon: Mail, label: "Email", value: portfolio?.email || "shindeshubham07447@gmail.com", href: `mailto:${portfolio?.email || "shindeshubham07447@gmail.com"}` },
+                { icon: Phone, label: "Phone", value: portfolio?.phone || "+91 63621 23723", href: `tel:${(portfolio?.phone || "+916362123723").replace(/\s+/g, "")}` },
+                { icon: Linkedin, label: "LinkedIn", value: "shubham-shinde", href: portfolio?.linkedinUrl || "https://www.linkedin.com/in/shubham-shinde----" },
+                { icon: Github, label: "GitHub", value: "Shubhamshindea", href: portfolio?.githubUrl || "https://github.com/Shubhamshindea" },
+                { icon: MapPin, label: "Location", value: portfolio?.location || "Bengaluru, India" },
               ].map(({ icon: Icon, label, value, href }) => {
                 const Inner = (
                   <div className="flex items-center gap-3">
