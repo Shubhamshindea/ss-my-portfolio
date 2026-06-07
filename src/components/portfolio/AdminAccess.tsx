@@ -196,7 +196,7 @@ export function AdminAccess() {
   );
 }
 
-function ContactInfoEditor({ portfolio, onSave }: { portfolio: NonNullable<ReturnType<typeof useAdminPortfolio>>; onSave: (patch: any) => Promise<void> }) {
+function ContactInfoEditor({ portfolio, onSave }: { portfolio: any; onSave: (patch: any) => Promise<void> }) {
   const [draft, setDraft] = useState({
     phone: portfolio.phone ?? "",
     email: portfolio.email ?? "",
@@ -232,9 +232,6 @@ function ContactInfoEditor({ portfolio, onSave }: { portfolio: NonNullable<Retur
   );
 }
 
-// helper type alias
-type AdminPortfolio = NonNullable<Awaited<ReturnType<typeof getAdminPortfolio>>["portfolio"]>;
-function useAdminPortfolio(): AdminPortfolio | null { return null; }
 
 function SkillRow({ skill, onSave, onDelete, refresh }: { skill: PortfolioSkill; onSave: any; onDelete: any; refresh: () => Promise<void> }) {
   const [draft, setDraft] = useState(skill);
