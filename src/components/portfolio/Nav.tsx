@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MoreVertical, Palette, Mail, Phone, Linkedin, Github, MapPin, X } from "lucide-react";
 import { AdminAccess } from "@/components/portfolio/AdminAccess";
+import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 import logo from "@/assets/logo.png";
 
 const links = [
