@@ -14,9 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      portfolio_projects: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          id: string
+          link_url: string | null
+          sort_order: number
+          subtitle: string | null
+          tags: string[]
+          title: string
+          updated_at: string
+          updated_by: string | null
+          year: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          link_url?: string | null
+          sort_order?: number
+          subtitle?: string | null
+          tags?: string[]
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+          year?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          link_url?: string | null
+          sort_order?: number
+          subtitle?: string | null
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+          year?: string | null
+        }
+        Relationships: []
+      }
       portfolio_settings: {
         Row: {
+          email: string | null
+          github_url: string | null
           id: string
+          linkedin_url: string | null
+          location: string | null
+          phone: string | null
           portrait_object_position: string
           portrait_path: string | null
           portrait_zoom: number
@@ -25,7 +75,12 @@ export type Database = {
           updated_by: string | null
         }
         Insert: {
+          email?: string | null
+          github_url?: string | null
           id?: string
+          linkedin_url?: string | null
+          location?: string | null
+          phone?: string | null
           portrait_object_position?: string
           portrait_path?: string | null
           portrait_zoom?: number
@@ -34,7 +89,12 @@ export type Database = {
           updated_by?: string | null
         }
         Update: {
+          email?: string | null
+          github_url?: string | null
           id?: string
+          linkedin_url?: string | null
+          location?: string | null
+          phone?: string | null
           portrait_object_position?: string
           portrait_path?: string | null
           portrait_zoom?: number
