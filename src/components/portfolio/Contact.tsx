@@ -176,31 +176,31 @@ export function Contact({ portfolio }: { portfolio?: PortfolioPublicData } = {})
         </div>
       </div>
 
-      <footer className="mt-12 border-t border-border pt-8 pb-6">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col items-center gap-5">
+      <footer className="mt-8 border-t border-border pt-4 pb-3">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col items-center gap-3">
           <button
             type="button"
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="group inline-flex flex-col items-center gap-2 text-muted-foreground hover:text-gold transition-colors"
+            className="group inline-flex flex-col items-center gap-1 text-muted-foreground hover:text-gold transition-colors"
           >
-            <span className="w-10 h-10 rounded-full border border-border group-hover:border-gold flex items-center justify-center transition-all group-hover:-translate-y-1">
-              <ArrowUp size={16} />
+            <span className="w-8 h-8 rounded-full border border-border group-hover:border-gold flex items-center justify-center transition-all group-hover:-translate-y-1">
+              <ArrowUp size={14} />
             </span>
-            <span className="text-[10px] uppercase tracking-[0.3em] font-mono">Back to top</span>
+            <span className="text-[9px] uppercase tracking-[0.3em] font-mono">Back to top</span>
           </button>
-          <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-2">
             <button
               type="button"
               onClick={scrollToTop}
-              className="flex items-center gap-3 hover:text-gold transition-colors"
+              className="flex items-center gap-2 hover:text-gold transition-colors"
               aria-label="Back to top"
             >
-              <img src={logo} alt="Monogram" width={24} height={24} className="w-6 h-6" loading="lazy" />
-              <span className="font-serif text-sm">Shubham Shinde</span>
+              <img src={logo} alt="Monogram" width={20} height={20} className="w-5 h-5" loading="lazy" />
+              <span className="font-serif text-xs">Shubham Shinde</span>
             </button>
-            <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest">
-              © MMXXVI · Crafted with intent
+            <p className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest">
+              © {new Date().getFullYear()} Shubham Shinde
             </p>
           </div>
         </div>
