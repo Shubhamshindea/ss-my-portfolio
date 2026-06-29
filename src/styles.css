@@ -270,6 +270,31 @@
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
+/* Background animation utilities */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -30px) scale(1.05); }
+  50% { transform: translate(-15px, 15px) scale(0.98); }
+  75% { transform: translate(10px, 25px) scale(1.02); }
+}
+@keyframes gradient-mesh {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes particle-float {
+  0%, 100% { opacity: 0.3; transform: translate(0, 0); }
+  25% { opacity: 0.8; transform: translate(10px, -20px); }
+  50% { opacity: 0.5; transform: translate(-10px, -40px); }
+  75% { opacity: 0.9; transform: translate(15px, -10px); }
+}
+.animate-float-slow { animation: float-slow linear infinite; }
+.animate-gradient-mesh { animation: gradient-mesh 20s ease-in-out infinite; }
+.animate-particle-float { animation: particle-float linear infinite; }
+
+
 /* Themed scrollbar — matches portfolio palette */
 html { scrollbar-color: var(--gold) var(--background); scrollbar-width: thin; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
