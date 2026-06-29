@@ -1,5 +1,6 @@
 import portrait from "@/assets/shubham-portrait.png.asset.json";
 import resumeAsset from "@/assets/resume_shubham.pdf.asset.json";
+import { BackgroundAnimation } from "@/components/portfolio/BackgroundAnimation";
 import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 
 export function Hero({ portfolio }: { portfolio?: PortfolioPublicData }) {
