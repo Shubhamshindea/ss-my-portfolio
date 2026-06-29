@@ -1,3 +1,4 @@
+import { SkillIcon } from "@/components/portfolio/SkillIcon";
 import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 
 const groups = [
@@ -55,7 +56,7 @@ export function Expertise({ portfolio }: { portfolio?: PortfolioPublicData }) {
               <ul className="space-y-3">
                 {g.items.map((it) => (
                   <li key={it} className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <span className="w-1.5 h-1.5 bg-gold rounded-full" />
+                    <SkillIcon label={it} className="w-5 h-5 shrink-0 text-gold" />
                     {it}
                   </li>
                 ))}

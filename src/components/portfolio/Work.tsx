@@ -4,6 +4,7 @@ const projects = [
     year: "2026",
     title: "E-Commerce Platform",
     type: "Full-Stack Application",
+    href: "https://github.com/Shubhamshindea/E-Commerce-Platform",
     blurb:
       "A production-grade e-commerce system with secure authentication, product management, and an integrated cart. Built end-to-end with Spring Boot REST APIs and a MySQL-backed transactional layer.",
     tags: ["Java", "Spring Boot", "MySQL", "REST", "JavaScript"],
@@ -18,6 +19,7 @@ const projects = [
     year: "2026",
     title: "Portfolio Website",
     type: "Frontend Engineering",
+    href: "https://github.com/Shubhamshindea/portfolio",
     blurb:
       "A fully responsive, modular portfolio crafted with clean frontend practices. Optimized for accessibility, performance, and visual polish — deployed on Vercel's edge.",
     tags: ["HTML", "CSS", "JavaScript", "Vercel"],
@@ -30,13 +32,14 @@ const projects = [
   {
     no: "03",
     year: "2025",
-    title: "IoT Embedded Systems",
+    title: "Multi-Control Wheelchair",
     type: "Hardware × Software",
+    href: "https://github.com/Shubhamshindea/multi-control-wheelchair",
     blurb:
-      "A series of IoT projects bridging electronics and code — sensor pipelines, real-time telemetry, and embedded control flows engineered for low-resource environments.",
-    tags: ["Embedded C", "Sensors", "Telemetry", "Automation"],
+      "An assistive wheelchair control system blending embedded electronics and software — enabling multi-modal inputs for safe, real-time mobility in low-resource environments.",
+    tags: ["Embedded C", "IoT", "Sensors", "Automation"],
     metrics: [
-      { k: "Real-time", v: "Telemetry" },
+      { k: "Real-time", v: "Control" },
       { k: "Low-RAM", v: "Footprint" },
       { k: "Modular", v: "Architecture" },
     ],
