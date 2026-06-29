@@ -1,5 +1,6 @@
 import portrait from "@/assets/shubham-portrait.png.asset.json";
 import resumeAsset from "@/assets/resume_shubham.pdf.asset.json";
+import { BackgroundAnimation } from "@/components/portfolio/BackgroundAnimation";
 import type { PortfolioPublicData } from "@/lib/portfolio.functions";
 
 export function Hero({ portfolio }: { portfolio?: PortfolioPublicData }) {
@@ -7,19 +8,7 @@ export function Hero({ portfolio }: { portfolio?: PortfolioPublicData }) {
   const resumeUrl = portfolio?.resumeUrl ?? resumeAsset.url;
   return (
     <section id="top" className="relative min-h-screen pt-32 pb-20 overflow-hidden grain">
-      {/* Background ornaments */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] rounded-full bg-gold/10 blur-[120px]" />
-        <div className="absolute bottom-0 -right-40 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[140px]" />
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
-      </div>
+      <BackgroundAnimation />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 space-y-8 animate-fade-up">
