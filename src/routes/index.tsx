@@ -39,6 +39,7 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <MouseTrail />
       <Nav portfolio={portfolio} />
       <Hero portfolio={portfolio} />
       <About />
