@@ -47,6 +47,7 @@ const projects = [
 ];
 
 import type { PortfolioPublicData } from "@/lib/portfolio.functions";
+import { useMemo, useState } from "react";
 
 export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
   const dynamicItems = portfolio?.projects?.length
@@ -61,6 +62,15 @@ export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
         metrics: [] as { k: string; v: string }[],
       }))
     : projects.map((p) => ({ ...p }));
+
+  const allTags = useMemo(() => {
+    const set = new Set<string>();
+    dynamicItems.forEach((p) => p.tags.forEach((t) => set.add(t)));
+    return Array.from(set).sort();
+  }, [dynamicItems]);
+
+  const [active, setActive] = useState<string>("All");
+  const filtered = active === "All" ? dynamicItems : dynamicItems.filter((p) => p.tags.includes(active));
 
   return (
     <section id="work" className="py-32 relative">
