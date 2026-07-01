@@ -60,7 +60,7 @@ export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
         href: p.linkUrl ?? null,
         metrics: [] as { k: string; v: string }[],
       }))
-    : projects.map((p) => ({ ...p, href: null as string | null }));
+    : projects.map((p) => ({ ...p }));
 
   return (
     <section id="work" className="py-32 relative">
