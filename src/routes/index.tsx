@@ -8,6 +8,7 @@ import { Expertise } from "@/components/portfolio/Expertise";
 import { Work } from "@/components/portfolio/Work";
 import { Experience } from "@/components/portfolio/Experience";
 import { getPublicPortfolio } from "@/lib/portfolio.functions";
+import { MouseTrail } from "@/components/portfolio/MouseTrail";
 
 import { Contact } from "@/components/portfolio/Contact";
 
