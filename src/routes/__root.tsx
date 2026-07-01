@@ -97,6 +97,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" },
       { rel: "stylesheet", href: appCss },
     ],
+    scripts: [
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js", defer: true },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
