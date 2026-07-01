@@ -8,6 +8,7 @@ import { Expertise } from "@/components/portfolio/Expertise";
 import { Work } from "@/components/portfolio/Work";
 import { Experience } from "@/components/portfolio/Experience";
 import { getPublicPortfolio } from "@/lib/portfolio.functions";
+import { MouseTrail } from "@/components/portfolio/MouseTrail";
 
 import { Contact } from "@/components/portfolio/Contact";
 
@@ -38,6 +39,7 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <MouseTrail />
       <Nav portfolio={portfolio} />
       <Hero portfolio={portfolio} />
       <About />
