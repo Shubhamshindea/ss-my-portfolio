@@ -47,6 +47,7 @@ const projects = [
 ];
 
 import type { PortfolioPublicData } from "@/lib/portfolio.functions";
+import { useMemo, useState } from "react";
 
 export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
   const dynamicItems = portfolio?.projects?.length
@@ -62,6 +63,15 @@ export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
       }))
     : projects.map((p) => ({ ...p }));
 
+  const allTags = useMemo(() => {
+    const set = new Set<string>();
+    dynamicItems.forEach((p) => p.tags.forEach((t) => set.add(t)));
+    return Array.from(set).sort();
+  }, [dynamicItems]);
+
+  const [active, setActive] = useState<string>("All");
+  const filtered = active === "All" ? dynamicItems : dynamicItems.filter((p) => p.tags.includes(active));
+
   return (
     <section id="work" className="py-32 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -74,8 +84,39 @@ export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
           </div>
         </div>
 
+        {allTags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-10 animate-fade-up">
+            {["All", ...allTags].map((tag) => {
+              const isActive = active === tag;
+              return (
+                <button
+                  key={tag}
+                  onClick={() => setActive(tag)}
+                  className={`text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-full border transition-all ${
+                    isActive
+                      ? "bg-gold text-background border-gold shadow-gold"
+                      : "border-border text-muted-foreground hover:text-gold hover:border-gold/60"
+                  }`}
+                >
+                  {tag}
+                  <span className="ml-2 opacity-60">
+                    {tag === "All"
+                      ? dynamicItems.length
+                      : dynamicItems.filter((p) => p.tags.includes(tag)).length}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         <div className="space-y-px bg-border">
-          {dynamicItems.map((p) => (
+          {filtered.length === 0 && (
+            <div className="bg-background p-12 text-center text-muted-foreground font-mono text-sm">
+              No projects match “{active}”.
+            </div>
+          )}
+          {filtered.map((p) => (
             <article
               key={p.no + p.title}
               className="bg-background p-8 lg:p-12 group hover:bg-card/60 transition-colors"
