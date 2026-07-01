@@ -119,8 +119,32 @@ export function Work({ portfolio }: { portfolio?: PortfolioPublicData } = {}) {
           {filtered.map((p) => (
             <article
               key={p.no + p.title}
-              className="bg-background p-8 lg:p-12 group hover:bg-card/60 transition-colors"
+              ref={(el) => {
+                if (!el) return;
+                const TM = (typeof window !== "undefined" && (window as any).TweenMax) as any;
+                if (!TM) return;
+                const enter = () => {
+                  TM.to(el, 0.4, {
+                    scale: 1.015,
+                    boxShadow: "0 20px 60px -10px var(--gold-soft), 0 0 0 1px var(--gold)",
+                    backgroundColor: "hsl(var(--card) / 0.7)",
+                    ease: (window as any).Power2?.easeOut,
+                  });
+                };
+                const leave = () => {
+                  TM.to(el, 0.5, {
+                    scale: 1,
+                    boxShadow: "0 0 0 rgba(0,0,0,0)",
+                    backgroundColor: "hsl(var(--background))",
+                    ease: (window as any).Power2?.easeOut,
+                  });
+                };
+                el.addEventListener("mouseenter", enter);
+                el.addEventListener("mouseleave", leave);
+              }}
+              className="bg-background p-8 lg:p-12 group transition-colors will-change-transform"
             >
+
               <div className="grid lg:grid-cols-12 gap-8 items-start">
                 <div className="lg:col-span-2 flex lg:flex-col gap-4 lg:gap-2">
                   <div className="font-serif text-5xl text-gold">{p.no}</div>
